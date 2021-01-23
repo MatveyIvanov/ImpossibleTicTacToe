@@ -7,7 +7,7 @@ using namespace sf;
 class Menu
 {
 public:
-	Menu(): gameStarted(false), difficulty("normal") {}
+	Menu(): gameStarted(false), difficulty("impossible") {}
 	/* Draw methods */
 	void draw_menu(RenderWindow&, Texture&, Texture&, Font&); // Draw menu
 	void draw_start_game_button(RenderWindow&, Texture&, Font&); // Draw start game button

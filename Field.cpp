@@ -44,10 +44,10 @@ void Field::draw_moves(RenderWindow& window) {
 
 void Field::draw_cross(RenderWindow& window, int* position, Color color) {
 	VertexArray cross(Lines, 4);
-	cross[0].position = Vector2f(this->fieldStart.x + this->cellSize * position[0] + 10, this->fieldStart.y + this->cellSize * position[1] + 10);
-	cross[1].position = Vector2f(this->fieldStart.x + this->cellSize * (position[0] + 1) - 10, this->fieldStart.y + this->cellSize * (position[1] + 1) - 10);
-	cross[2].position = Vector2f(this->fieldStart.x + this->cellSize * (position[0] + 1) - 10, this->fieldStart.y + this->cellSize * position[1] + 10);
-	cross[3].position = Vector2f(this->fieldStart.x + this->cellSize * position[0] + 10, this->fieldStart.y + this->cellSize * (position[1] + 1) - 10);
+	cross[0].position = Vector2f(this->fieldStart.x + this->cellSize * position[1] + 10, this->fieldStart.y + this->cellSize * position[0] + 10);
+	cross[1].position = Vector2f(this->fieldStart.x + this->cellSize * (position[1] + 1) - 10, this->fieldStart.y + this->cellSize * (position[0] + 1) - 10);
+	cross[2].position = Vector2f(this->fieldStart.x + this->cellSize * (position[1] + 1) - 10, this->fieldStart.y + this->cellSize * position[0] + 10);
+	cross[3].position = Vector2f(this->fieldStart.x + this->cellSize * position[1] + 10, this->fieldStart.y + this->cellSize * (position[0] + 1) - 10);
 	cross[0].color = color;
 	cross[1].color = color;
 	cross[2].color = color;
@@ -57,9 +57,9 @@ void Field::draw_cross(RenderWindow& window, int* position, Color color) {
 
 void Field::draw_zero(RenderWindow& window, int* position, Color color) {
 	CircleShape zero((this->cellSize - 10) / 2);
-	zero.setPosition(this->fieldStart.x + this->cellSize * position[0] + 5, this->fieldStart.y + this->cellSize * position[1] + 5);
+	zero.setPosition(this->fieldStart.x + this->cellSize * position[1] + 5, this->fieldStart.y + this->cellSize * position[0] + 5);
 	zero.setFillColor(Color::Transparent);
-	zero.setOutlineThickness(1);
+	zero.setOutlineThickness((color == Color::White) ? 1 : 2);
 	zero.setOutlineColor(color);
 	window.draw(zero);
 }
@@ -175,8 +175,8 @@ void Field::set_winner(std::string s) {
 
 int* Field::spot_cell(Vector2i mousePos) {
 	int* position = new int[2];
-	position[0] = (mousePos.x - this->fieldStart.x) / this->cellSize;
-	position[1] = (mousePos.y - this->fieldStart.y) / this->cellSize;
+	position[0] = (mousePos.y - this->fieldStart.y) / this->cellSize;
+	position[1] = (mousePos.x - this->fieldStart.x) / this->cellSize;
 	return position;
 }
 

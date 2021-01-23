@@ -256,12 +256,12 @@ int* Computer::impossible_difficult(Field& field) {
 			else {
 				if (f[2][2] == 0) {
 					if (f[1][0] == 0) {
-						f[1][0] = 1;
+						f[1][0] = f[1][1] = f[1][2] = 3;
 						position[0] = 1;
 						position[1] = 0;
 						this->currentMove = 1;
 						field.set_game_over(true);
-						field.set_winner("draw");
+						field.set_winner("computer");
 					}
 					else {
 						f[2][0] = 1;
@@ -273,12 +273,12 @@ int* Computer::impossible_difficult(Field& field) {
 				else {
 					if (f[2][0] == 1) {
 						if (f[0][2] == 0) {
-							f[0][2] = 1;
+							f[0][2] = f[1][1] = f[2][0] = 3;
 							position[0] = 0;
 							position[1] = 2;
 							this->currentMove = 1;
 							field.set_game_over(true);
-							field.set_winner("draw");
+							field.set_winner("computer");
 						}
 						else {
 							f[1][2] = 1;
@@ -289,12 +289,12 @@ int* Computer::impossible_difficult(Field& field) {
 					}
 					else {
 						if (f[0][0] == 0) {
-							f[0][0] = 1;
+							f[0][0] = f[1][1] = f[2][2] = 3;
 							position[0] = 0;
 							position[1] = 0;
 							this->currentMove = 1;
 							field.set_game_over(true);
-							field.set_winner("draw");
+							field.set_winner("computer");
 						}
 						else {
 							f[1][0] = 1;
@@ -308,36 +308,7 @@ int* Computer::impossible_difficult(Field& field) {
 			break;
 		}
 		case 5: { // 5th move
-			if (f[1][0] == 0) {
-				f[1][0] = 1;
-				position[0] = 1;
-				position[1] = 0;
-				this->currentMove = 1;
-				field.set_game_over(true);
-				field.set_winner("draw");
-			}
-			else if (f[1][2] == 0) {
-				f[1][2] = 1;
-				position[0] = 1;
-				position[1] = 2;
-				this->currentMove = 1;
-				field.set_game_over(true);
-				field.set_winner("draw");
-			}
-			else {
-				for (int row = 0; row < 3; row++) {
-					for (int column = 0; column < 3; column++) {
-						if (f[row][column] == 0) {
-							f[row][column] = 1;
-							position[0] = row;
-							position[1] = column;
-							this->currentMove = 1;
-							field.set_game_over(true);
-							field.set_winner("draw");
-						}
-					}
-				}
-			}
+			position = this->last_move(field);
 			break;
 		}
 		}

@@ -10,30 +10,30 @@ int main()
 {
     ContextSettings settings;
     settings.antialiasingLevel = 8;
-    RenderWindow window(VideoMode(1920, 1080), L"TicTacToe", Style::Default, settings);
+    RenderWindow window(VideoMode::getFullscreenModes()[0], L"TicTacToe", Style::Fullscreen, settings);
     Menu menu;
     Field field(window);
     Player player;
     Computer computer;
 
     Texture defaultButton, menuButton, restartButton, closeButton;
-    if (!defaultButton.loadFromFile("default_button.png"))
+    if (!defaultButton.loadFromFile("images/default_button.png"))
         std::cout << "Error loading default button" << std::endl;
-    if (!menuButton.loadFromFile("menu_button.png"))
+    if (!menuButton.loadFromFile("images/menu_button.png"))
         std::cout << "Error loading menu button" << std::endl;
-    if (!restartButton.loadFromFile("restart_button.png"))
+    if (!restartButton.loadFromFile("images/restart_button.png"))
         std::cout << "Error loading restart button" << std::endl;
-    if (!closeButton.loadFromFile("close_button.png"))
+    if (!closeButton.loadFromFile("images/close_button.png"))
         std::cout << "Error loading close button" << std::endl;
 
     Font font;
-    if (!font.loadFromFile("PottaOne-Regular.ttf"))
+    if (!font.loadFromFile("fonts/PottaOne-Regular.ttf"))
         std::cout << "Error loading font" << std::endl;
 
     Texture bg1, bg2;
-    if (!bg1.loadFromFile("bg1.png"))
+    if (!bg1.loadFromFile("images/bg1.png"))
         std::cout << "Error loading background" << std::endl;
-    if (!bg2.loadFromFile("bg2.png"))
+    if (!bg2.loadFromFile("images/bg2.png"))
         std::cout << "Error loading background" << std::endl;
     Sprite background1, background2;
     background1.setTexture(bg1);
@@ -86,7 +86,7 @@ int main()
                     Vector2f mousePosF(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
                     if (!menu.game_is_started()) {
                         if (menu.get_difficulty_button().getGlobalBounds().contains(mousePosF)) {
-                            menu.change_difficulty();
+                            // menu.change_difficulty();
                         }
                         if (menu.get_start_button().getGlobalBounds().contains(mousePosF)) {
                             menu.start_game(true);
